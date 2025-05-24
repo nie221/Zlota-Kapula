@@ -1,8 +1,10 @@
 
 function showTab(tabId) {
     const tabs = document.querySelectorAll('.tab');
-    tabs.forEach(tab => tab.style.display = 'none');
-    document.getElementById(tabId).style.display = 'block';
+    tabs.forEach(tab => {
+        tab.classList.remove('active');
+    });
+    document.getElementById(tabId).classList.add('active');
 }
 function saveMemory() {
     const files = document.getElementById("fileInput").files;
@@ -73,11 +75,18 @@ function renderLibrary() {
         const timeLeft = Math.ceil((memory.unlockDate - now) / (1000 * 60 * 60 * 24));
         const div = document.createElement("div");
         div.className = "memoryItem";
-        div.innerHTML = `${memory.icon ? `<img src="${memory.icon}" alt="Ikona">` : ''}` +
-                        `<div><strong>${new Date(memory.created).toLocaleDateString()}</strong>: ` +
-                        (isUnlocked ? `<span style="color:#90ee90;">ODBLOCKOWANE</span>` :
-                         `Odblokowanie za ${timeLeft} dni`) +
-                        `<br>Treść: ${memory.text.substring(0,20)}...</div>`;
+        if (isUnlocked) {
+            div.innerHTML = `${memory.icon ? `<img src="${memory.icon}" alt="Ikona">` : ''}` +
+                            `<div><strong>${new Date(memory.created).toLocaleDateString()}</strong>: ` +
+                            `<span style="color:#90ee90;">ODBLOCKOWANE</span><br>` +
+                            `Treść: ${memory.text}<br>` +
+                            `${memory.files.map(file => `<a href="${file.content}" download="${file.name}">${file.name}</a>`).join(', ')}</div>`;
+        } else {
+            div.innerHTML = `${memory.icon ? `<img src="${memory.icon}" alt="Ikona">` : ''}` +
+                            `<div><strong>${new Date(memory.created).toLocaleDateString()}</strong>: ` +
+                            `<span style="color:#f08080;">ZABLOKOWANE</span> (Odblokowanie za ${timeLeft} dni)<br>` +
+                            `<em>Zawartość ukryta</em></div>`;
+        }
         container.appendChild(div);
     });
 }

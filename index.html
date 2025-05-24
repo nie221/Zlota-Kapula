@@ -3,7 +3,7 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <title>Złota Kapsuła Czasu V4</title>
+    <title>Złota Kapsuła Czasu V5</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -16,11 +16,11 @@
         </ul>
     </div>
     <div class="content">
-        <section id="history" class="tab">
+        <section id="history" class="tab active">
             <h1>🕰 Historia wspomnień</h1>
             <div id="memoryLibrary"></div>
         </section>
-        <section id="add" class="tab" style="display:none;">
+        <section id="add" class="tab">
             <h1>📝 Dodaj wspomnienie</h1>
             <input type="file" id="fileInput" multiple><br><br>
             <input type="file" id="iconInput" accept="image/*"><br><small>Dodaj ikonę wspomnienia</small><br><br>
@@ -30,9 +30,9 @@
             <button onclick="saveMemory()">Zapisz wspomnienie</button>
             <p id="status"></p>
         </section>
-        <section id="about" class="tab" style="display:none;">
+        <section id="about" class="tab">
             <h1>ℹ️ O aplikacji</h1>
-            <p>To jest Złota Kapsuła Czasu V4 – twoje cyfrowe miejsce na wspomnienia. Możesz zapisać zdjęcia, teksty i ustawić datę odblokowania w przyszłości. Teraz z ładnym menu bocznym!</p>
+            <p>To jest Złota Kapsuła Czasu V5 – twoje cyfrowe miejsce na wspomnienia. Możesz zapisać zdjęcia, teksty i ustawić datę odblokowania w przyszłości. Teraz z menu bocznym, animacjami i ochroną zawartości!</p>
         </section>
     </div>
     <script src="script.js"></script>
