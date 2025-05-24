@@ -1,47 +1,66 @@
 
-function saveData() {
+function saveMemory() {
     const files = document.getElementById("fileInput").files;
     const text = document.getElementById("textInput").value;
+    const years = parseInt(document.getElementById("yearsSelect").value);
     const timestamp = Date.now();
-    const unlockDate = timestamp + 365 * 24 * 60 * 60 * 1000; // rok
+    const unlockDate = timestamp + years * 365 * 24 * 60 * 60 * 1000;
+    const id = 'memory_' + timestamp;
 
     const data = {
+        id: id,
         text: text,
         files: [],
-        unlockDate: unlockDate
+        unlockDate: unlockDate,
+        created: timestamp
     };
 
-    for (let i = 0; i < files.length; i++) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            data.files.push({
-                name: files[i].name,
-                content: e.target.result
-            });
-            if (data.files.length === files.length) {
-                localStorage.setItem("kapsula", JSON.stringify(data));
-                document.getElementById("status").innerText = "Dane zapisane!";
-            }
-        };
-        reader.readAsDataURL(files[i]);
-    }
-
-    if (files.length === 0) {
-        localStorage.setItem("kapsula", JSON.stringify(data));
-        document.getElementById("status").innerText = "Dane zapisane!";
+    let processedFiles = 0;
+    if (files.length > 0) {
+        for (let i = 0; i < files.length; i++) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                data.files.push({
+                    name: files[i].name,
+                    content: e.target.result
+                });
+                processedFiles++;
+                if (processedFiles === files.length) {
+                    saveToLocalStorage(data);
+                }
+            };
+            reader.readAsDataURL(files[i]);
+        }
+    } else {
+        saveToLocalStorage(data);
     }
 }
 
-window.onload = function() {
-    const kapsula = JSON.parse(localStorage.getItem("kapsula"));
-    if (kapsula) {
+function saveToLocalStorage(memory) {
+    let memories = JSON.parse(localStorage.getItem("kapsula_memories")) || [];
+    memories.push(memory);
+    localStorage.setItem("kapsula_memories", JSON.stringify(memories));
+    document.getElementById("status").innerText = "Wspomnienie zapisane!";
+    renderLibrary();
+}
+
+function renderLibrary() {
+    const container = document.getElementById("memoryLibrary");
+    container.innerHTML = "";
+    const memories = JSON.parse(localStorage.getItem("kapsula_memories")) || [];
+
+    memories.forEach(memory => {
         const now = Date.now();
-        if (now >= kapsula.unlockDate) {
-            alert("Twoje wspomnienia zostały odblokowane!");
-            console.log(kapsula);
-        } else {
-            const timeLeft = Math.ceil((kapsula.unlockDate - now) / (1000 * 60 * 60 * 24));
-            document.getElementById("status").innerText = `Odblokowanie za ${timeLeft} dni`;
-        }
-    }
-};
+        const isUnlocked = now >= memory.unlockDate;
+        const timeLeft = Math.ceil((memory.unlockDate - now) / (1000 * 60 * 60 * 24));
+        const div = document.createElement("div");
+        div.className = "memoryItem";
+        div.innerHTML = `<strong>${new Date(memory.created).toLocaleDateString()}</strong>: ` +
+                        (isUnlocked ? `<span style="color:green;">ODBLOCKOWANE</span>` :
+                         `Odblokowanie za ${timeLeft} dni`) +
+                        `<br>Treść: ${memory.text.substring(0,20)}...`;
+        container.appendChild(div);
+    });
+}
+
+window.onload = renderLibrary;

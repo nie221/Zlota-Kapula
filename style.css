@@ -2,7 +2,7 @@
 body {
     font-family: Arial, sans-serif;
     padding: 20px;
-    background-color: #f9f9f9;
+    background-color: #f0f8ff;
 }
 h1 {
     color: goldenrod;
@@ -10,4 +10,17 @@ h1 {
 textarea {
     width: 300px;
     height: 100px;
+}
+#memoryLibrary {
+    margin-top: 20px;
+    background: white;
+    padding: 10px;
+    border-radius: 10px;
+}
+.memoryItem {
+    border-bottom: 1px solid #ccc;
+    padding: 5px 0;
+}
+.memoryItem:last-child {
+    border-bottom: none;
 }
