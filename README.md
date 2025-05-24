@@ -1,16 +1,14 @@
 
-# Złota Kapsuła Czasu V3
+# Złota Kapsuła Czasu V4
 
-Ulepszona wersja z pięknym ciemno-zielonym motywem i własnymi ikonami wspomnień.
+Nowa wersja z menu bocznym i zakładkami!
 
 ## Funkcje
-- Piękne ciemne GUI z zielonymi akcentami.
-- Dodawanie wspomnień z własną ikoną.
-- Wybór dowolnej daty odblokowania wspomnienia (data i godzina).
-- Przejrzysta biblioteka wspomnień.
+- 🕰 Historia wspomnień
+- 📝 Dodaj nowe wspomnienie (z własną ikoną i dowolną datą odblokowania)
+- ℹ️ O aplikacji
+- Piękny ciemny motyw z zielonymi akcentami
 
 ## Jak uruchomić?
 1. Otwórz `index.html` w przeglądarce.
-2. Dodaj wspomnienie, wybierz datę i godzinę odblokowania.
-3. Kliknij "Zapisz wspomnienie".
-4. Przeglądaj bibliotekę wspomnień.
+2. Wybierz zakładkę z menu po lewej.

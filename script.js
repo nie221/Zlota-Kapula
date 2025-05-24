@@ -1,4 +1,9 @@
 
+function showTab(tabId) {
+    const tabs = document.querySelectorAll('.tab');
+    tabs.forEach(tab => tab.style.display = 'none');
+    document.getElementById(tabId).style.display = 'block';
+}
 function saveMemory() {
     const files = document.getElementById("fileInput").files;
     const iconFile = document.getElementById("iconInput").files[0];
@@ -11,7 +16,6 @@ function saveMemory() {
     const unlockDate = new Date(dateInput).getTime();
     const timestamp = Date.now();
     const id = 'memory_' + timestamp;
-
     const data = {
         id: id,
         text: text,
@@ -20,9 +24,7 @@ function saveMemory() {
         unlockDate: unlockDate,
         created: timestamp
     };
-
     let processedFiles = 0;
-
     if (iconFile) {
         const reader = new FileReader();
         reader.onload = function(e) {
@@ -33,7 +35,6 @@ function saveMemory() {
     } else {
         processFiles();
     }
-
     function processFiles() {
         if (files.length > 0) {
             for (let i = 0; i < files.length; i++) {
@@ -55,7 +56,6 @@ function saveMemory() {
         }
     }
 }
-
 function saveToLocalStorage(memory) {
     let memories = JSON.parse(localStorage.getItem("kapsula_memories")) || [];
     memories.push(memory);
@@ -63,12 +63,10 @@ function saveToLocalStorage(memory) {
     document.getElementById("status").innerText = "Wspomnienie zapisane!";
     renderLibrary();
 }
-
 function renderLibrary() {
     const container = document.getElementById("memoryLibrary");
     container.innerHTML = "";
     const memories = JSON.parse(localStorage.getItem("kapsula_memories")) || [];
-
     memories.forEach(memory => {
         const now = Date.now();
         const isUnlocked = now >= memory.unlockDate;
@@ -83,5 +81,7 @@ function renderLibrary() {
         container.appendChild(div);
     });
 }
-
-window.onload = renderLibrary;
+window.onload = function() {
+    renderLibrary();
+    showTab('history');
+};

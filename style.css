@@ -1,17 +1,36 @@
 
 body {
     font-family: Arial, sans-serif;
-    padding: 20px;
     background: linear-gradient(to bottom, #1e1e1e, #2f4f2f);
     color: #dcdcdc;
     margin: 0;
-}
-header {
     display: flex;
-    align-items: center;
-    gap: 10px;
 }
-h1, h2 {
+.sidebar {
+    background: #222;
+    width: 200px;
+    height: 100vh;
+    padding: 20px;
+}
+.sidebar h2 {
+    color: #90ee90;
+}
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+.sidebar li {
+    padding: 10px 0;
+    cursor: pointer;
+}
+.sidebar li:hover {
+    background-color: #333;
+}
+.content {
+    padding: 20px;
+    flex-grow: 1;
+}
+h1 {
     color: #90ee90;
 }
 textarea, input[type="file"], input[type="datetime-local"] {

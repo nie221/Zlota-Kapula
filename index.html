@@ -3,17 +3,25 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <title>Złota Kapsuła Czasu V3</title>
+    <title>Złota Kapsuła Czasu V4</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <img src="assets/logo.png" alt="Logo kapsuły czasu" width="100">
-        <h1>Złota Kapsuła Czasu V3</h1>
-    </header>
-    <main>
-        <section class="add-memory">
-            <h2>Dodaj wspomnienie</h2>
+    <div class="sidebar">
+        <h2>🌟 Kapsuła</h2>
+        <ul>
+            <li onclick="showTab('history')">🕰 Historia</li>
+            <li onclick="showTab('add')">📝 Dodaj wspomnienie</li>
+            <li onclick="showTab('about')">ℹ️ O aplikacji</li>
+        </ul>
+    </div>
+    <div class="content">
+        <section id="history" class="tab">
+            <h1>🕰 Historia wspomnień</h1>
+            <div id="memoryLibrary"></div>
+        </section>
+        <section id="add" class="tab" style="display:none;">
+            <h1>📝 Dodaj wspomnienie</h1>
             <input type="file" id="fileInput" multiple><br><br>
             <input type="file" id="iconInput" accept="image/*"><br><small>Dodaj ikonę wspomnienia</small><br><br>
             <textarea id="textInput" placeholder="Napisz coś..."></textarea><br><br>
@@ -22,11 +30,11 @@
             <button onclick="saveMemory()">Zapisz wspomnienie</button>
             <p id="status"></p>
         </section>
-        <section class="library">
-            <h2>Biblioteka wspomnień</h2>
-            <div id="memoryLibrary"></div>
+        <section id="about" class="tab" style="display:none;">
+            <h1>ℹ️ O aplikacji</h1>
+            <p>To jest Złota Kapsuła Czasu V4 – twoje cyfrowe miejsce na wspomnienia. Możesz zapisać zdjęcia, teksty i ustawić datę odblokowania w przyszłości. Teraz z ładnym menu bocznym!</p>
         </section>
-    </main>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>
