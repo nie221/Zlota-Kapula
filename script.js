@@ -1,38 +1,58 @@
 
 function saveMemory() {
     const files = document.getElementById("fileInput").files;
+    const iconFile = document.getElementById("iconInput").files[0];
     const text = document.getElementById("textInput").value;
-    const years = parseInt(document.getElementById("yearsSelect").value);
+    const dateInput = document.getElementById("dateInput").value;
+    if (!dateInput) {
+        document.getElementById("status").innerText = "Wybierz datę odblokowania!";
+        return;
+    }
+    const unlockDate = new Date(dateInput).getTime();
     const timestamp = Date.now();
-    const unlockDate = timestamp + years * 365 * 24 * 60 * 60 * 1000;
     const id = 'memory_' + timestamp;
 
     const data = {
         id: id,
         text: text,
         files: [],
+        icon: null,
         unlockDate: unlockDate,
         created: timestamp
     };
 
     let processedFiles = 0;
-    if (files.length > 0) {
-        for (let i = 0; i < files.length; i++) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                data.files.push({
-                    name: files[i].name,
-                    content: e.target.result
-                });
-                processedFiles++;
-                if (processedFiles === files.length) {
-                    saveToLocalStorage(data);
-                }
-            };
-            reader.readAsDataURL(files[i]);
-        }
+
+    if (iconFile) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            data.icon = e.target.result;
+            processFiles();
+        };
+        reader.readAsDataURL(iconFile);
     } else {
-        saveToLocalStorage(data);
+        processFiles();
+    }
+
+    function processFiles() {
+        if (files.length > 0) {
+            for (let i = 0; i < files.length; i++) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    data.files.push({
+                        name: files[i].name,
+                        content: e.target.result
+                    });
+                    processedFiles++;
+                    if (processedFiles === files.length) {
+                        saveToLocalStorage(data);
+                    }
+                };
+                reader.readAsDataURL(files[i]);
+            }
+        } else {
+            saveToLocalStorage(data);
+        }
     }
 }
 
@@ -55,10 +75,11 @@ function renderLibrary() {
         const timeLeft = Math.ceil((memory.unlockDate - now) / (1000 * 60 * 60 * 24));
         const div = document.createElement("div");
         div.className = "memoryItem";
-        div.innerHTML = `<strong>${new Date(memory.created).toLocaleDateString()}</strong>: ` +
-                        (isUnlocked ? `<span style="color:green;">ODBLOCKOWANE</span>` :
+        div.innerHTML = `${memory.icon ? `<img src="${memory.icon}" alt="Ikona">` : ''}` +
+                        `<div><strong>${new Date(memory.created).toLocaleDateString()}</strong>: ` +
+                        (isUnlocked ? `<span style="color:#90ee90;">ODBLOCKOWANE</span>` :
                          `Odblokowanie za ${timeLeft} dni`) +
-                        `<br>Treść: ${memory.text.substring(0,20)}...`;
+                        `<br>Treść: ${memory.text.substring(0,20)}...</div>`;
         container.appendChild(div);
     });
 }

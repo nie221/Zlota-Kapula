@@ -3,25 +3,30 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <title>Złota Kapsuła Czasu V2</title>
+    <title>Złota Kapsuła Czasu V3</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Złota Kapsuła Czasu V2</h1>
-    <p>Dodaj wspomnienia, które odblokują się po wybranym czasie!</p>
-    <input type="file" id="fileInput" multiple><br><br>
-    <textarea id="textInput" placeholder="Napisz coś..."></textarea><br><br>
-    <label for="yearsSelect">Odblokuj za:</label>
-    <select id="yearsSelect">
-        <option value="1">1 rok</option>
-        <option value="2">2 lata</option>
-        <option value="5">5 lat</option>
-        <option value="10">10 lat</option>
-    </select><br><br>
-    <button onclick="saveMemory()">Zapisz wspomnienie</button>
-    <p id="status"></p>
-    <h2>Biblioteka wspomnień</h2>
-    <div id="memoryLibrary"></div>
+    <header>
+        <img src="assets/logo.png" alt="Logo kapsuły czasu" width="100">
+        <h1>Złota Kapsuła Czasu V3</h1>
+    </header>
+    <main>
+        <section class="add-memory">
+            <h2>Dodaj wspomnienie</h2>
+            <input type="file" id="fileInput" multiple><br><br>
+            <input type="file" id="iconInput" accept="image/*"><br><small>Dodaj ikonę wspomnienia</small><br><br>
+            <textarea id="textInput" placeholder="Napisz coś..."></textarea><br><br>
+            <label for="dateInput">Odblokuj w dniu:</label><br>
+            <input type="datetime-local" id="dateInput"><br><br>
+            <button onclick="saveMemory()">Zapisz wspomnienie</button>
+            <p id="status"></p>
+        </section>
+        <section class="library">
+            <h2>Biblioteka wspomnień</h2>
+            <div id="memoryLibrary"></div>
+        </section>
+    </main>
     <script src="script.js"></script>
 </body>
 </html>

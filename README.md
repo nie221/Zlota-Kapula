@@ -1,16 +1,16 @@
 
-# Złota Kapsuła Czasu V2
+# Złota Kapsuła Czasu V3
 
-Ulepszona wersja projektu Złota Kapsuła Czasu.
+Ulepszona wersja z pięknym ciemno-zielonym motywem i własnymi ikonami wspomnień.
 
 ## Funkcje
-- Piękniejsze GUI.
-- Przechowywanie wielu wspomnień.
-- Wybór czasu odblokowania (1, 2, 5, 10 lat).
-- Biblioteka wspomnień z datą i statusem odblokowania.
+- Piękne ciemne GUI z zielonymi akcentami.
+- Dodawanie wspomnień z własną ikoną.
+- Wybór dowolnej daty odblokowania wspomnienia (data i godzina).
+- Przejrzysta biblioteka wspomnień.
 
 ## Jak uruchomić?
-1. Otwórz plik `index.html` w przeglądarce.
-2. Dodaj wspomnienie, wybierz czas odblokowania.
+1. Otwórz `index.html` w przeglądarce.
+2. Dodaj wspomnienie, wybierz datę i godzinę odblokowania.
 3. Kliknij "Zapisz wspomnienie".
 4. Przeglądaj bibliotekę wspomnień.
